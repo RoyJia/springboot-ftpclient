@@ -1,8 +1,6 @@
 package cu.yoandypv.ftp.exceptions;
 
-/**
- * Created by Yoandy Pérez Villazón on 14/09/17.
- */
+
 public class ErrorMessage {
 
     private int errorcode;

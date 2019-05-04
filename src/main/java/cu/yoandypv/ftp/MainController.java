@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 
-/**
- * Created by Yoandy Pérez Villazón 14/09/17.
- */
+
 @RestController
 public class MainController {
 
@@ -31,5 +29,14 @@ public class MainController {
         }
     }
 
+    @RequestMapping( value = "/download", method = RequestMethod.GET)
+    public void downloadFromFTP() {
+        try {
+            ftpService.connectToFTP("192.168.1.102","a","a");
+            ftpService.downloadFileFromFTP("uploads/foto.png","/home/kaka.png");
+        } catch (FTPErrors ftpErrors) {
+            System.out.println(ftpErrors.getMessage());
+        }
+    }
 
 }

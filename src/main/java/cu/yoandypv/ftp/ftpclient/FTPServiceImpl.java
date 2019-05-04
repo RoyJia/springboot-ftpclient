@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 
-/**
- * Created by Yoandy Pérez Villazón on 14/09/17.
- */
 
 @Service
 public class FTPServiceImpl implements FTPService {
@@ -43,7 +40,7 @@ public class FTPServiceImpl implements FTPService {
         try {
             ftpconnection.connect(host);
         } catch (IOException e) {
-            ErrorMessage errorMessage = new ErrorMessage(-1, "No fue posible conectarse al FTP a través del host=" + host);
+            ErrorMessage errorMessage = new ErrorMessage(-1, "It was not possible to connect to FTP through the host =" + host);
             logger.error(errorMessage.toString());
             throw new FTPErrors(errorMessage);
         }
@@ -55,7 +52,7 @@ public class FTPServiceImpl implements FTPService {
             try {
                 ftpconnection.disconnect();
             } catch (IOException e) {
-                ErrorMessage errorMessage = new ErrorMessage(-2, "No fue posible conectarse al FTP, el host=" + host + " entregó la respuesta=" + reply);
+                ErrorMessage errorMessage = new ErrorMessage(-2, "It was not possible to connect to FTP, the host =" + host + " delivered the answer =" + reply);
                 logger.error(errorMessage.toString());
                 throw new FTPErrors(errorMessage);
             }
@@ -64,7 +61,7 @@ public class FTPServiceImpl implements FTPService {
         try {
             ftpconnection.login(user, pass);
         } catch (IOException e) {
-            ErrorMessage errorMessage = new ErrorMessage(-3, "El usuario=" + user + ", y el pass=**** no fueron válidos para la autenticación.");
+            ErrorMessage errorMessage = new ErrorMessage(-3, "The user =" + user + ", and the pass = **** were not valid for authentication.");
             logger.error(errorMessage.toString());
             throw new FTPErrors(errorMessage);
         }
@@ -72,7 +69,7 @@ public class FTPServiceImpl implements FTPService {
         try {
             ftpconnection.setFileType(FTP.BINARY_FILE_TYPE);
         } catch (IOException e) {
-            ErrorMessage errorMessage = new ErrorMessage(-4, "El tipo de dato para la transferencia no es válido.");
+            ErrorMessage errorMessage = new ErrorMessage(-4, "The data type for the transfer is not valid.");
             logger.error(errorMessage.toString());
             throw new FTPErrors(errorMessage);
         }
@@ -88,13 +85,13 @@ public class FTPServiceImpl implements FTPService {
      * @throws FTPErrors Set of possible errors associated with upload process.
      */
     @Override
-    public void uploadFileToFTP(File file, String ftpHostDir , String serverFilename) throws FTPErrors {
+    public void uploadFileToFTP(File file, String ftpHostDir, String serverFilename) throws FTPErrors {
 
         try {
             InputStream input = new FileInputStream(file);
             this.ftpconnection.storeFile(ftpHostDir + serverFilename, input);
         } catch (IOException e) {
-            ErrorMessage errorMessage = new ErrorMessage(-5, "No se pudo subir el archivo al servidor.");
+            ErrorMessage errorMessage = new ErrorMessage(-5, "The file could not be uploaded to the server.");
             logger.error(errorMessage.toString());
             throw new FTPErrors(errorMessage);
         }
@@ -115,7 +112,7 @@ public class FTPServiceImpl implements FTPService {
         try {
             fos = new FileOutputStream(copytoPath);
         } catch (FileNotFoundException e) {
-            ErrorMessage errorMessage = new ErrorMessage(-6, "No se pudo obtener la referencia a la carpeta relativa donde guardar, verifique la ruta y los permisos.");
+            ErrorMessage errorMessage = new ErrorMessage(-6, "Could not get the reference to the relative folder to save, verify the path and permissions.");
             logger.error(errorMessage.toString());
             throw new FTPErrors(errorMessage);
         }
@@ -123,7 +120,7 @@ public class FTPServiceImpl implements FTPService {
         try {
             this.ftpconnection.retrieveFile(ftpRelativePath, fos);
         } catch (IOException e) {
-            ErrorMessage errorMessage = new ErrorMessage(-7, "No se pudo descargar el archivo.");
+            ErrorMessage errorMessage = new ErrorMessage(-7, "The file could not be downloaded.");
             logger.error(errorMessage.toString());
             throw new FTPErrors(errorMessage);
         }
@@ -140,7 +137,7 @@ public class FTPServiceImpl implements FTPService {
                 this.ftpconnection.logout();
                 this.ftpconnection.disconnect();
             } catch (IOException f) {
-               throw new FTPErrors( new ErrorMessage(-8, "Ha ocurrido un error al realizar la desconexión del servidor FTP"));
+               throw new FTPErrors( new ErrorMessage(-8, "An error occurred when disconnecting the FTP server."));
             }
         }
     }
