@@ -141,4 +141,15 @@ public class FTPServiceImpl implements FTPService {
             }
         }
     }
+
+    public boolean deleteFile(String filePath) throws FTPErrors {
+        boolean reply = false;
+        try {
+            replay = this.ftpconnection.deleteFile(filePath);
+        } catch (Exception e) {
+            throw new FTPErrors( new ErrorMessage(-9, "An error occurred when delete file=" + filePath));
+        }
+
+        return reply;
+    }
 }

@@ -9,5 +9,5 @@ public interface FTPService {
      void uploadFileToFTP(File file, String ftpHostDir , String serverFilename) throws FTPErrors;
      void downloadFileFromFTP(String ftpRelativePath, String copytoPath) throws FTPErrors;
      void disconnectFTP() throws FTPErrors;
-
+     boolean deleteFile(String filePath);
 }

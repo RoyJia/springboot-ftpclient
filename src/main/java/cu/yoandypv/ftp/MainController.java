@@ -39,4 +39,14 @@ public class MainController {
         }
     }
 
+    @RequestMapping( value = "/delete", method = RequestMethod.GET)
+    public void downloadFromFTP() {
+        try {
+            ftpService.connectToFTP("192.168.1.102","a","a");
+            ftpService.deleteFile("uploads/foto.png","/home/kaka.png");
+        } catch (FTPErrors ftpErrors) {
+            System.out.println(ftpErrors.getMessage());
+        }
+    }
+
 }
