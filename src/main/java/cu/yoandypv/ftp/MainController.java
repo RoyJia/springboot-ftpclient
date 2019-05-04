@@ -19,7 +19,6 @@ public class MainController {
     @RequestMapping( value = "/upload", method = RequestMethod.GET)
     public void uploadExample(){
         try {
-
               ftpService.connectToFTP("192.168.1.102","a","a");
               ftpService.uploadFileToFTP(new File("/home/yoandypv/img.png"),"uploads/","foto.png");
               ftpService.downloadFileFromFTP("uploads/foto.png","/home/kaka.png");
@@ -43,7 +42,7 @@ public class MainController {
     public void downloadFromFTP() {
         try {
             ftpService.connectToFTP("192.168.1.102","a","a");
-            ftpService.deleteFile("uploads/foto.png","/home/kaka.png");
+            ftpService.deleteFile("/home/kaka.png");
         } catch (FTPErrors ftpErrors) {
             System.out.println(ftpErrors.getMessage());
         }
